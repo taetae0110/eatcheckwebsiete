@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우리 학교 급식 정보</title>
+    <!-- FontAwesome 추가 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>우리 학교 급식 정보</h1>
+            <div id="auth-container" class="auth-container">
+                <!-- 로그인/회원가입 상태에 따라 동적으로 변경됨 -->
+            </div>
+        </header>
+
+        <main>
+            <!-- 즐겨찾기 섹션 -->
+            <section id="favorites-section" class="section favorites-section">
+                <h2>즐겨찾기</h2>
+                <div id="favorites-list" class="favorites-list">
+                    <!-- 즐겨찾기 항목들이 여기에 동적으로 추가됨 -->
+                </div>
+            </section>
+
+            <section class="section search-section">
+                <h2>학교 검색</h2>
+                <div class="search-container">
+                    <select id="eduOfficeCode">
+                        <option value="">-- 교육청 선택 --</option>
+                        <option value="B10">서울특별시교육청</option>
+                        <option value="C10">부산광역시교육청</option>
+                        <option value="D10">대구광역시교육청</option>
+                        <option value="E10">인천광역시교육청</option>
+                        <option value="F10">광주광역시교육청</option>
+                        <option value="G10">대전광역시교육청</option>
+                        <option value="H10">울산광역시교육청</option>
+                        <option value="I10">세종특별자치시교육청</option>
+                        <option value="J10">경기도교육청</option>
+                        <option value="K10">강원특별자치도교육청</option>
+                        <option value="M10">충청북도교육청</option>
+                        <option value="N10">충청남도교육청</option>
+                        <option value="P10">전라북도교육청</option>
+                        <option value="Q10">전라남도교육청</option>
+                        <option value="R10">경상북도교육청</option>
+                        <option value="S10">경상남도교육청</option>
+                        <option value="T10">제주특별자치도교육청</option>
+                    </select>
+                    <input type="text" id="schoolName" placeholder="학교명을 입력하세요">
+                    <button id="searchBtn" class="btn">검색</button>
+                </div>
+                <div id="schoolResults" class="results-container">
+                    <!-- 학교 검색 결과가 여기에 표시됨 -->
+                </div>
+            </section>
+            
+            <section class="section meal-section">
+                <h2>급식 정보</h2>
+                <div class="meal-date">
+                    <button id="prevDay" class="btn btn-sm">이전</button>
+                    <input type="date" id="mealDate">
+                    <button id="nextDay" class="btn btn-sm">다음</button>
+                </div>
+                <div id="selectedSchoolInfo" class="school-info">
+                    <!-- 선택된 학교 정보가 여기에 표시됨 -->
+                </div>
+                <div id="mealResults" class="results-container">
+                    <!-- 급식 정보가 여기에 표시됨 -->
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>© 2025 우리 학교 급식 정보 | NEIS Open API 활용</p>
+        </footer>
+    </div>
+    
+    <script src="auth.js"></script>
+    <script src="favorites.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

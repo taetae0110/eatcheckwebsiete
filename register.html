@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 - 우리 학교 급식 정보</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-page {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .page-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>우리 학교 급식 정보</h1>
+        </header>
+
+        <div class="auth-page">
+            <div class="page-header">
+                <h2>회원가입</h2>
+            </div>
+            
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-username">아이디</label>
+                    <input type="text" id="register-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">이메일</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">비밀번호</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm-password">비밀번호 확인</label>
+                    <input type="password" id="register-confirm-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">회원가입</button>
+            </form>
+            
+            <div class="page-footer">
+                <p>이미 계정이 있으신가요? <a href="login.html">로그인</a></p>
+                <p><a href="index.html">홈으로 돌아가기</a></p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 우리 학교 급식 정보 | NEIS Open API 활용</p>
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('register-form');
+            
+            // 회원가입 폼 제출 처리
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('register-username').value;
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('register-confirm-password').value;
+                
+                // 비밀번호 확인
+                if (password !== confirmPassword) {
+                    alert('비밀번호가 일치하지 않습니다.');
+                    return;
+                }
+                
+                // 회원가입 처리 함수 호출
+                if (register(username, email, password)) {
+                    alert('회원가입 되었습니다. 로그인 페이지로 이동합니다.');
+                    window.location.href = 'login.html'; // 회원가입 성공 시 로그인 페이지로 리다이렉트
+                }
+            });
+            
+            // 회원가입 처리 함수
+            function register(username, email, password) {
+                // localStorage에서 사용자 목록 가져오기
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                
+                // 사용자명 또는 이메일 중복 확인
+                if (users.some(u => u.username === username)) {
+                    alert('이미 사용 중인 아이디입니다.');
+                    return false;
+                }
+                
+                if (users.some(u => u.email === email)) {
+                    alert('이미 사용 중인 이메일입니다.');
+                    return false;
+                }
+                
+                // 새 사용자 생성
+                const newUser = {
+                    id: Date.now().toString(), // 간단한 고유 ID 생성
+                    username,
+                    email,
+                    password, // 실제 서비스에서는 비밀번호 해싱 필요
+                    favorites: []
+                };
+                
+                // 사용자 목록에 추가
+                users.push(newUser);
+                
+                // localStorage에 저장
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                return true;
+            }
+            
+            // 현재 시간 업데이트
+            document.getElementById('current-time').textContent = "2025-03-20 06:15:48";
+        });
+    </script>
+</body>
+</html>
